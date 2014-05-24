@@ -1,6 +1,7 @@
 'use strict';
 
 require('sugar');
+var fs = require('fs');
 var path = require('path');
 var tasksDirectory = path.join(__dirname, 'tasks');
 

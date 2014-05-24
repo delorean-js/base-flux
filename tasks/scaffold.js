@@ -3,11 +3,12 @@
 var Promise = require('bluebird');
 var fs = require('fs');
 var path = require('path');
-var scaffolt = Promise.promisify(require('scaffolt'));
+var scaffolt = require('scaffolt');
+var scaffoltP = Promise.promisify(scaffolt);
 
 module.exports = function(options) {
-  var generatorsType = options.inProject ? 'project' : 'root';
-  var generatorsPath = path.join('../generators', generatorsType);
+  var generatorsType = options.isProject ? 'project' : 'root';
+  var generatorsPath = path.join(__dirname, '../generators', generatorsType);
   var revert = false;
 
   // Aliases for generator tasks
@@ -27,7 +28,7 @@ module.exports = function(options) {
       if(names) {
         names.split(',').forEach(function(name) {
           if(generator !== 'project' || name !== 'shared') {
-            promises.push(scaffolt(generator, name, {
+            promises.push(scaffoltP(generator, name, {
               generatorsPath: generatorsPath,
               revert: revert
             }));
@@ -41,7 +42,7 @@ module.exports = function(options) {
       return Promise.all(promises);
     }
     else {
-      scaffolt.list();
+      scaffolt.list({generatorsPath: generatorsPath});
     }
   });
 
@@ -53,8 +54,8 @@ module.exports = function(options) {
   });
 };
 
-function generators(path) {
-  return fs.readdirSync(path).filter(function(generator) {
-    return fs.existsSync(path.join(path, generator, 'generator.json'));
+function generators(generatorsPath) {
+  return fs.readdirSync(generatorsPath).filter(function(generator) {
+    return fs.existsSync(path.join(generatorsPath, generator, 'generator.json'));
   });
 }

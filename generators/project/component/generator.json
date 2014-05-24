@@ -1,5 +1,5 @@
 {
-  "description": "test file for site testing with WebDriverJS",
+  "description": "React component",
   "files": [
     {
       "from": "component.js.hbs",

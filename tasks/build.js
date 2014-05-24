@@ -2,6 +2,7 @@
 
 require('sugar');
 var Promise = require('bluebird');
+var path = require('path');
 var webpack = require('webpack');
 var split = Array.prototype.split;
 
