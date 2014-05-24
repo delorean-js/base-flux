@@ -46,14 +46,24 @@ module.exports = function(options) {
 
 function runWebpack(config, action) {
   var compiler = webpack(config);
-  return Promise
-    .promisify(compiler[action], compiler)
-    .apply(null, slice.call(arguments, 2))
-    .then(function(stats) {
-      console.log(stats.toString({
-        colors: true
-      }));
-    });
+  var args = slice.call(arguments, 2);
+
+  return new Promise(function(resolve, reject) {
+    args.push(callback);
+    compiler[action].apply(compiler, args);
+
+    function callback(err, stats) {
+      if(!err) {
+        console.log(stats.toString({
+          colors: true
+        }));
+        resolve(stats);
+      }
+      else {
+        reject(err);
+      }
+    }
+  });
 }
 
 function addDevelopmentOptions(config) {
