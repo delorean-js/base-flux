@@ -1,1 +1,2 @@
-require('../../jakelib/project');
+// Load Delorean tasks
+require('delorean-tasks')({isProject: true});
