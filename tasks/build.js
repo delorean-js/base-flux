@@ -45,9 +45,9 @@ module.exports = function(options) {
 };
 
 function runWebpack(config, action) {
-  var instance = webpack(config);
+  var compiler = webpack(config);
   return Promise
-    .promisify(instance[action], instance)
+    .promisify(compiler[action], compiler)
     .apply(null, slice.call(arguments, 2))
     .then(function(stats) {
       console.log(stats.toString({
