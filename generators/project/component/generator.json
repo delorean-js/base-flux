@@ -1,0 +1,14 @@
+{
+  "description": "test file for site testing with WebDriverJS",
+  "files": [
+    {
+      "from": "component.js.hbs",
+      "to": "components/{{dasherize name}}/index.js"
+    },
+    {
+      "from": "test.js.hbs",
+      "to": "components/{{dasherize name}}/component_test.js"
+    }
+  ],
+  "dependencies": []
+}

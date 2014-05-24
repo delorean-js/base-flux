@@ -1,0 +1,11 @@
+'use strict';
+
+require('file?name={{dasherize name}}/index.html!./index.html');
+require('./index.less');
+require('initialize');
+var React = require('react');
+var app = require('./app');
+var routes = require('./routes');
+
+React.renderComponent(app(), document.body);
+routes.start();

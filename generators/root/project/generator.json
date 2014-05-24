@@ -1,0 +1,41 @@
+{
+  "description": "project",
+  "files": [
+    {
+      "from": "template/Jakefile",
+      "to": "src/{{dasherize name}}/Jakefile"
+    },
+    {
+      "from": "template/index.js.hbs",
+      "to": "src/{{dasherize name}}/index.js"
+    },
+    {
+      "from": "template/index.html",
+      "to": "src/{{dasherize name}}/index.html"
+    },
+    {
+      "from": "template/index.less",
+      "to": "src/{{dasherize name}}/index.less"
+    },
+    {
+      "from": "template/app.js",
+      "to": "src/{{dasherize name}}/app.js"
+    },
+    {
+      "from": "template/routes/index.js",
+      "to": "src/{{dasherize name}}/routes/index.js"
+    },
+    {
+      "from": "template/stores/view.js",
+      "to": "src/{{dasherize name}}/stores/view.js"
+    },
+    {
+      "from": "template/views/404.js",
+      "to": "src/{{dasherize name}}/views/404.js"
+    },
+    {
+      "from": "template/views/index.js",
+      "to": "src/{{dasherize name}}/views/index.js"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "description": " ",
+  "repository": "git",
+  "dependencies": {
+    "sugar": "^1.4.1",
+    "webpack": "^1.2.0",
+    "bluebird": "^1.2.4"
+  }
+}
