@@ -8,8 +8,8 @@ module.exports = React.createClass({
   displayName: 'App',
   componentDidMount: function() {
     this.subscription = viewStore
-    .distinctUntilChanged()
-    .subscribe(this.setView);
+      .distinctUntilChanged()
+      .subscribe(this.setView);
   },
   componentWillUnmount: function() {
     this.subscription.dispose();
