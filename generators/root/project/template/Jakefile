@@ -1,2 +1,2 @@
 // Load Delorean tasks
-require('delorean-tasks')({isProject: true});
+require('delorean-tasks-flux')({isProject: true});
