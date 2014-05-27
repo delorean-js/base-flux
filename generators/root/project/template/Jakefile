@@ -1,2 +1,5 @@
 // Load Delorean tasks
-require('delorean-flux').tasks({isProject: true});
+require('delorean-flux').tasks({
+  basePath: require('path').join(__dirname, '../..'),
+  isProject: true
+});
