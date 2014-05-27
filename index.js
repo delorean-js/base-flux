@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
-  config: require('./config'),
-  tasks: require('./tasks')
+  karma: require('./karma'),
+  tasks: require('./tasks'),
+  webpack: require('./webpack')
 };

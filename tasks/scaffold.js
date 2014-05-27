@@ -1,5 +1,6 @@
 'use strict';
 
+require('sugar');
 var Promise = require('bluebird');
 var fs = require('fs');
 var path = require('path');

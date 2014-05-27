@@ -7,8 +7,8 @@ var webpack = require('webpack');
 var slice = Array.prototype.slice;
 
 module.exports = function(options) {
-  var configPath = path.join(options.basePath, 'webpack.config');
-  var config = Object.clone(require(configPath), true);
+  var configFile = path.join(options.basePath, 'webpack.config');
+  var config = Object.clone(require(configFile), true);
 
   namespace('build', function() {
     desc('Build project for development');
