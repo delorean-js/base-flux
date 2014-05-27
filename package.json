@@ -1,12 +1,12 @@
 {
-  "name": "delorean-tasks",
+  "name": "delorean-tasks-flux",
   "version": "0.1.0",
-  "description": "Common tasks for a Delorean project",
+  "description": "Common tasks for a Flux project with Delorean",
   "author": "jupl",
-  "homepage": "https://github.com/deloren-js/tasks",
+  "homepage": "https://github.com/deloren-js/tasks-flux",
   "repository": {
     "type": "git",
-    "url": "git@github.com:delorean-js/tasks.git"
+    "url": "git@github.com:delorean-js/tasks-flux.git"
   },
   "main": "./index.js",
   "dependencies": {
