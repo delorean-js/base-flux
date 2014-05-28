@@ -27,6 +27,9 @@ module.exports = function(opts) {
       path: paths.output,
       filename: '[name]/index.js'
     },
+    resolveLoader: {
+      root: path.join(__dirname, '../node_modules')
+    },
     module: {
       loaders: [
         {test: /\.(?:eot|svg|ttf|woff)$/, loader: 'url'},

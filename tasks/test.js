@@ -91,12 +91,14 @@ module.exports = function(options) {
     switch(process.env.watch) {
       case 'server':
       case 'true':
+        options.autoWatch = true;
         return new Promise(function(resolve) {
           karma.server.start(options, resolve);
         });
 
       case 'false':
       default:
+        options.singleRun = true;
         return new Promise(function(resolve) {
           karma.runner.run(options, resolve);
         });
