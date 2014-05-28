@@ -4,7 +4,6 @@ require('sugar');
 var Promise = require('bluebird');
 var npm = require('npm');
 var path = require('path');
-var npmInstall = Promise.promisify(npm.commands.install);
 var karmaModules = {
   'karma-chai-plugins': '^0.2.1',
   'karma-detect-browsers': '^0.1.2',
@@ -23,18 +22,40 @@ module.exports = function(options) {
           return true;
         }
         try {
-          require.resolve(module);
+          require.resolve(path.join(basePath, 'node_modules', module));
+          return false;
         }
         catch(e) {
           return true;
         }
       })
       .map(function(module) {
-        return module + karmaModules[module];
+        return module + '@' + karmaModules[module];
       });
 
       if(install.length) {
-        return npmInstall(install);
+        return new Promise(function(resolve, reject) {
+          npm.load({}, function(err) {
+            if(!err) {
+              resolve()
+            }
+            else {
+              reject(err);
+            }
+          })
+        })
+        .then(function() {
+          return new Promise(function(resolve, reject) {
+            npm.commands.install(install, function(err) {
+              if(!err) {
+                resolve();
+              }
+              else {
+                reject(err);
+              }
+            })
+          });
+        });
       }
     });
 
@@ -46,8 +67,8 @@ module.exports = function(options) {
       };
       var server; // IF WE WANT TO START SERVER, START SERVER HERE
 
-      if(project) {
-        project.split(',').forEach(function(project) {
+      if(process.env.project) {
+        process.env.project.split(',').forEach(function(project) {
           var files = path.join(basePath, 'src', project, '**/*_test.js');
           config.files.push(files);
         });
@@ -63,23 +84,24 @@ module.exports = function(options) {
       });
     });
   });
+
+  function runKarma(options) {
+    var karma = require(path.join(basePath, 'node_modules/karma'));
+
+    switch(process.env.watch) {
+      case 'server':
+      case 'true':
+        return new Promise(function(resolve) {
+          karma.server.start(options, resolve);
+        });
+
+      case 'false':
+      default:
+        return new Promise(function(resolve) {
+          karma.runner.run(options, resolve);
+        });
+        break;
+    }
+  }
 };
 
-function runKarma(options) {
-  var karma = require('karma');
-
-  switch(process.env.watch) {
-    case 'server':
-    case 'true':
-      return new Promise(function(resolve) {
-        karma.server.start(options, resolve);
-      });
-
-    case 'false':
-    default:
-      return new Promise(function(resolve) {
-        karma.runner.run(options, resolve);
-      });
-      break;
-  }
-}

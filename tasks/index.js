@@ -15,7 +15,7 @@ module.exports = function(options) {
 
   // Load tasks
   tasks().forEach(function(task) {
-    require(path.join(tasksDirectory, task))(options);
+    require(path.join(__dirname, task))(options);
   });
 
   // Set default task
@@ -28,7 +28,7 @@ function tasks() {
   return fs
   .readdirSync(__dirname)
   .filter(function(fileOrDir) {
-    return fs.statSync(path.join(tasksDirectory, fileOrDir)).isFile();
+    return fs.statSync(path.join(__dirname, fileOrDir)).isFile();
   })
   .filter(function(file) {
     return file.endsWith('.js');

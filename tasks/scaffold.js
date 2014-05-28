@@ -42,7 +42,7 @@ module.exports = function(options) {
       })
       .reduce(function(a, b) {
         return a.concat(b);
-      })
+      }, [])
       .filter(function(param) {
         return param.generator !== 'project' || param.name !== 'shared';
       });
