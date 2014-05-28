@@ -41,7 +41,45 @@ module.exports = function(options) {
       return runWebpack(config, 'watch', 200);
     });
   });
+
+  namespace('server', function() {
+    desc('Continuously build project for development with a server');
+    task('dev', ['watch:dev'], function() {
+      return startServer();
+    });
+
+    desc('Continuously build project for production with a server');
+    task('prod', ['watch:prod'], function() {
+      return startServer();
+    });
+  })
+
+  function startServer() {
+    var server = require(path.join(options.basePath, 'server'));
+    var port = process.env.port || 8000;
+    return Promise.promisify(server.listen, server)(port).then(function() {
+      console.log('\nServer started on port', port);
+    });
+  }
 };
+
+function addDevelopmentOptions(config) {
+  config.debug = true;
+  config.devtool = 'inline-source-map';
+}
+
+function addProductionOptions(config) {
+  config.plugins = config.plugins || [];
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  config.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+}
+
+function filterProjects(options) {
+  var project = process.env.project;
+  if(project) {
+    options.entry = Object.select(options.entry, project.split(','));
+  }
+}
 
 function runWebpack(config, action) {
   var compiler = webpack(config);
@@ -63,22 +101,4 @@ function runWebpack(config, action) {
       }
     }
   });
-}
-
-function addDevelopmentOptions(config) {
-  config.debug = true;
-  config.devtool = 'inline-source-map';
-}
-
-function addProductionOptions(config) {
-  config.plugins = config.plugins || [];
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-  config.plugins.push(new webpack.optimize.OccurenceOrderPlugin());
-}
-
-function filterProjects(options) {
-  var project = process.env.project;
-  if(project) {
-    options.entry = Object.select(options.entry, project.split(','));
-  }
 }

@@ -58,7 +58,7 @@ module.exports = function(options) {
       }
     });
 
-    desc('Build project for production');
+    desc('Run and evaluate unit tests');
     task('unit', function() {
       var config = {
         configFile: configFile,
