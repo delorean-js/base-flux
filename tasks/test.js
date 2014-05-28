@@ -1,6 +1,5 @@
 'use strict';
 
-require('sugar');
 var Promise = require('bluebird');
 var npm = require('npm');
 var path = require('path');
@@ -65,7 +64,6 @@ module.exports = function(options) {
         configFile: configFile,
         files: []
       };
-      var server; // IF WE WANT TO START SERVER, START SERVER HERE
 
       if(process.env.project) {
         process.env.project.split(',').forEach(function(project) {
@@ -77,11 +75,7 @@ module.exports = function(options) {
         config.files.push(path.join(basePath, 'src/**/*_test.js'));
       }
 
-      return runKarma(config).then(function() {
-        if(server) {
-          // KILL SERVER HERE
-        }
-      });
+      return runKarma(config);
     });
   });
 
