@@ -10,7 +10,6 @@ var karmaModules = {
 };
 
 module.exports = function(options) {
-  var basePath = options.basePath;
   var configFile = path.join(options.basePath, 'karma.conf.js');
 
   namespace('test', function() {
@@ -21,7 +20,7 @@ module.exports = function(options) {
           return true;
         }
         try {
-          require.resolve(path.join(basePath, 'node_modules', module));
+          require.resolve(path.join(options.basePath, 'node_modules', module));
           return false;
         }
         catch(e) {
@@ -61,40 +60,38 @@ module.exports = function(options) {
     desc('Run and evaluate unit tests');
     task('unit', function() {
       var config = {
-        configFile: configFile,
-        files: []
+        configFile: configFile
       };
 
       if(process.env.project) {
-        process.env.project.split(',').forEach(function(project) {
-          var files = path.join(basePath, 'src', project, '**/*_test.js');
-          config.files.push(files);
+        config.files = process.env.project.split(',').map(function(project) {
+          return path.join(project, '**/*_test.js');
         });
       }
       else {
-        config.files.push(path.join(basePath, 'src/**/*_test.js'));
+        config.files = ['**/*_test.js'];
       }
 
       return runKarma(config);
     });
   });
 
-  function runKarma(options) {
-    var karma = require(path.join(basePath, 'node_modules/karma'));
+  function runKarma(config) {
+    var karma = require(path.join(options.basePath, 'node_modules/karma'));
 
     switch(process.env.watch) {
       case 'server':
       case 'true':
-        options.autoWatch = true;
+        options.singleRun = false;
         return new Promise(function(resolve) {
-          karma.server.start(options, resolve);
+          karma.server.start(config, resolve);
         });
 
       case 'false':
       default:
         options.singleRun = true;
         return new Promise(function(resolve) {
-          karma.runner.run(options, resolve);
+          karma.runner.run(config, resolve);
         });
         break;
     }
