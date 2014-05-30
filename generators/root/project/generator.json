@@ -1,5 +1,5 @@
 {
-  "description": "project",
+  "description": "Flux application project",
   "files": [
     {
       "from": "template/Jakefile",

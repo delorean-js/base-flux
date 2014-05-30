@@ -1,5 +1,5 @@
 {
-  "description": "test file for site testing with WebDriverJS",
+  "description": "Flux store using RxJS",
   "files": [
     {
       "from": "store.js.hbs",
