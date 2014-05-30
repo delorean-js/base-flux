@@ -34,6 +34,7 @@ module.exports = function(opts) {
       loaders: [
         {test: /\.(?:eot|svg|ttf|woff)$/, loader: 'url'},
         {test: /\.js$/, loader: 'jsx'},
+        {test: /\.css$/, loader: 'style!css!autoprefixer'},
         {test: /\.less$/, loader: 'style!css!autoprefixer!less'},
       ]
     }
