@@ -1,9 +1,9 @@
 {
   "name": "delorean-flux",
   "version": "0.1.0",
-  "description": "Common base for a Flux project with Delorean",
+  "description": "Base for a Flux project",
   "author": "jupl",
-  "homepage": "https://github.com/deloren-js/base-flux",
+  "homepage": "https://github.com/delorean-js/base-flux",
   "repository": {
     "type": "git",
     "url": "git@github.com:delorean-js/base-flux.git"
