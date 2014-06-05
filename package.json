@@ -1,6 +1,6 @@
 {
   "name": "delorean-flux",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Base for a Flux project",
   "author": "jupl",
   "homepage": "https://github.com/delorean-js/base-flux",

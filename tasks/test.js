@@ -6,7 +6,8 @@ var path = require('path');
 var karmaModules = {
   'karma-chai-plugins': '^0.2.1',
   'karma-detect-browsers': '^0.1.2',
-  'karma-mocha': '^0.1.3'
+  'karma-mocha': '^0.1.3',
+  'karma-webpack': '^1.2.1'
 };
 
 module.exports = function(options) {

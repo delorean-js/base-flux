@@ -19,8 +19,7 @@ module.exports = function(opts) {
       root: paths.source,
       modulesDirectories: [paths.modules, paths.bower, paths.shared],
       alias: {
-        rx: 'rx/dist/rx.lite.compat.js',
-        'rx-testing': 'rx/dist/rx.testing.js'
+        rx: 'rx/dist/rx.lite.compat.js'
       }
     },
     output: {
