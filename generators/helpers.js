@@ -15,6 +15,10 @@ module.exports = function(Handlebars) {
     return parseString(string, true).underscore().humanize();
   });
 
+  Handlebars.registerHelper('titleize', function(string) {
+    return parseString(string, true).titleize();
+  });
+
   Handlebars.registerHelper('underscore', function(string, cleanSlashes) {
     return parseString(string, cleanSlashes).underscore();
   });

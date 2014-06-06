@@ -10,7 +10,7 @@
       "to": "src/{{dasherize name true}}/index.js"
     },
     {
-      "from": "template/index.html",
+      "from": "template/index.html.hbs",
       "to": "src/{{dasherize name true}}/index.html"
     },
     {
